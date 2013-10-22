@@ -1,8 +1,16 @@
-node 'devtest1'{
+node 'client-project-apache'{
+   include git
+
    class { 'apache': }
    
-   apache::vhost { 'first.example.com':
-     port    => '80',
-     docroot => '/var/www/first',
+   apache::vhost { '*':
+      port    => '80',
+      docroot => '/var/www/',
    }
+   
+   exec { "pull repo" :
+      command => 'git clone https://github.com/nodefortytwo/dd-php.git /var/www/',
+      path    => ["/usr/bin", "/usr/sbin"]
+   }
+   
 }
