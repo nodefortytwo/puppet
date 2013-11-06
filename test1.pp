@@ -7,21 +7,10 @@ node 'client-project-apache'{
        onlyif => "/bin/sh -c '[ ! -f /var/cache/apt/pkgcache.bin ] || /usr/bin/find /etc/apt/* -cnewer /var/cache/apt/pkgcache.bin | /bin/grep . > /dev/null'",
    }
    
-   package { "python-pip":
+   package { "python-setuptools":
           ensure => "latest",
           require  => Exec['apt-get update']
    }
-   
-   package { "python-dev":
-          ensure => "latest",
-          require  => Exec['apt-get update']
-   }
-   
-   package { "build-essential ":
-          ensure => "latest",
-          require  => Exec['apt-get update']
-   }
-   
    
    class { 'apache': }
    
