@@ -1,6 +1,6 @@
 node 'client-project-apache'{
    include git
-   include supervisord
+   include supervisor
    
    class { 'apache': }
    
@@ -18,13 +18,13 @@ node 'client-project-apache'{
       path    => ["/usr/bin", "/usr/sbin"]
    }
    
-   class { 'supervisord': }
+   class { 'supervisor': }
    
-   supervisord::program { 'mysql':
+   supervisor::program { 'mysql':
       command   => '/usr/bin/mysqld_safe'
    }
    
-   supervisord::program { 'apache':
+   supervisor::program { 'apache':
       command   => '/etc/apache2/foreground.sh'
    }
 }
