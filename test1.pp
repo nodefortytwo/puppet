@@ -12,6 +12,11 @@ node 'client-project-apache'{
           require  => Exec['apt-get update']
    }
    
+   package { "python-pip":
+          ensure => "latest",
+          require  => Package['python-setuptools']
+   }
+   
    class { 'apache': }
    
    class { '::mysql::server':
