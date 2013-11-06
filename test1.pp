@@ -2,6 +2,19 @@ node 'client-project-apache'{
    include git
    include supervisor
    
+   package { "python-pip python-dev build-essential ":
+          ensure => "latest"
+   }
+   
+   package { "python-dev":
+          ensure => "latest"
+   }
+   
+   package { "build-essential ":
+          ensure => "latest"
+   }
+   
+   
    class { 'apache': }
    
    class { '::mysql::server':
