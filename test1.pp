@@ -18,7 +18,7 @@ node 'client-project-apache'{
    }
    
    class { 'apache':
-      $service_enable = false
+      $service_enable => false
    }
    
    class { '::mysql::server':
