@@ -3,7 +3,9 @@ node 'client-project-apache'{
 
    class { 'apache': }
    
-   class { 'mysql': }
+   class { '::mysql::server':
+     override_options => { 'mysqld' => { 'max_connections' => '1024' } }
+   }
    
    apache::vhost { '*':
       port    => '80',
