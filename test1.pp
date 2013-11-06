@@ -2,7 +2,7 @@ node 'client-project-apache'{
    include git
    include supervisor
    
-   package { "python-pip python-dev build-essential ":
+   package { "python-pip":
           ensure => "latest"
    }
    
