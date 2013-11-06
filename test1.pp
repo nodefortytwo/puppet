@@ -17,7 +17,9 @@ node 'client-project-apache'{
           require  => Package['python-setuptools']
    }
    
-   class { 'apache':}
+   class { 'apache':
+      $service_enable = false
+   }
    
    class { '::mysql::server':
      override_options => { 'mysqld' => { 'max_connections' => '1024' } }
