@@ -18,13 +18,15 @@ node 'client-project-apache'{
       path    => ["/usr/bin", "/usr/sbin"]
    }
    
-   class { 'supervisor': }
-   
-   supervisor::program { 'mysql':
-      command   => '/usr/bin/mysqld_safe'
+   supervisor::service { 'mysql':
+      command   => '/usr/bin/mysqld_safe',
+      ensure      => present,
+      enable      => true,
    }
    
-   supervisor::program { 'apache':
-      command   => '/etc/apache2/foreground.sh'
+   supervisor::service { 'apache':
+      command   => '/etc/apache2/foreground.sh',
+      ensure      => present,
+      enable      => true,
    }
 }
