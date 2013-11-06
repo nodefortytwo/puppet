@@ -3,6 +3,8 @@ node 'client-project-apache'{
 
    class { 'apache': }
    
+   class { 'mysql': }
+   
    apache::vhost { '*':
       port    => '80',
       docroot => '/var/www/',
