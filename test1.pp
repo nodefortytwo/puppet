@@ -17,8 +17,10 @@ node 'client-project-apache'{
           require  => Package['python-setuptools']
    }
    
-   class { 'apache':
-      override_options => { 'httpd' => { 'service_enable' => false } }
+   class { 'apache':}
+   
+   service { 'httpd':
+      ensure => stopped
    }
    
    class { '::mysql::server':
