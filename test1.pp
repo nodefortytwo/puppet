@@ -36,14 +36,12 @@ node 'client-project-apache'{
    supervisor::service { 'mysql':
       command   => '/usr/bin/mysqld_safe',
       ensure      => present,
-      enable      => true,
       require  => Package['python-pip']
    }
    
    supervisor::service { 'apache':
       command   => '/etc/apache2/foreground.sh',
       ensure      => present,
-      enable      => true,
       require  => Package['python-pip']
    }
 }
