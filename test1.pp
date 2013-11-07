@@ -16,14 +16,8 @@ node 'client-project-apache'{
           ensure => "latest",
           require  => Package['python-setuptools']
    }
-
-   class bbh::apache inherits apache {
-      service { 'httpd':
-         ensure => stopped
-      }
-   }
    
-   
+   class {'bbh::apache':}
    
    class { '::mysql::server':
      override_options => { 'mysqld' => { 'max_connections' => '1024' } }
@@ -49,5 +43,11 @@ node 'client-project-apache'{
       command   => '/etc/apache2/foreground.sh',
       ensure      => present,
       require  => Package['python-pip']
+   }
+}
+
+class bbh::apache inherits apache {
+   service { 'httpd':
+      ensure => stopped
    }
 }
