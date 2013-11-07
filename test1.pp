@@ -23,10 +23,7 @@ node 'client-project-apache'{
    
    class { '::mysql::server':
      override_options => { 'mysqld' => { 'max_connections' => '1024' } },
-   }
-   
-   class { '::mysql::server::service':
-      service_ensure => 'stopped'
+     real_service_enabled => false
    }
    
    apache::vhost { '*':
