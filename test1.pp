@@ -16,12 +16,14 @@ node 'client-project-apache'{
           ensure => "latest",
           require  => Package['python-setuptools']
    }
-   
-   class { 'apache':}
-   
-   service { 'httpd':
-      ensure => stopped
+
+   class bbh::apache inherits apache {
+      service { 'httpd':
+         ensure => stopped
+      }
    }
+   
+   
    
    class { '::mysql::server':
      override_options => { 'mysqld' => { 'max_connections' => '1024' } }
