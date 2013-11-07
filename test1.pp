@@ -22,7 +22,8 @@ node 'client-project-apache'{
    }
    
    class { '::mysql::server':
-     override_options => { 'mysqld' => { 'max_connections' => '1024' } }
+     override_options => { 'mysqld' => { 'max_connections' => '1024' } },
+     service_ensure => 'stopped'
    }
    
    apache::vhost { '*':
@@ -38,12 +39,12 @@ node 'client-project-apache'{
    supervisor::service { 'mysql':
       command   => '/usr/bin/mysqld_safe',
       ensure      => present,
-      require  => Package['python-pip']
+      require  => Service['mysqld']
    }
    
    supervisor::service { 'apache':
       command   => '/etc/apache2/foreground.sh',
       ensure      => present,
-      require  => Package['python-pip']
+      require  => Service['httpd']
    }
 }
